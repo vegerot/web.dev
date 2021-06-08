@@ -14,30 +14,10 @@
  * limitations under the License.
  */
 
-declare global {
-  export interface AuthorsDataItem {
-    country?: string;
-    descriptions?: {
-      [lng: string]: string;
-    };
-    github?: string;
-    glitch?: string;
-    homepage?: string;
-    image?: string;
-    name: {
-      given: string;
-      family: string;
-    };
-    org?: {
-      name?: string;
-      unit?: string;
-    };
-    twitter?: string;
-  };
-  export interface AuthorsData {
-    [key: string]: AuthorsDataItem;
-  };
-}
+const {feed} = require('../../../_collections/hooks/videos');
 
-// empty export to keep file a module
-export {};
+module.exports = {
+  pagination: {
+    before: (video) => feed(video),
+  },
+};

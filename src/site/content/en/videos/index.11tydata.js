@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,10 @@
  * limitations under the License.
  */
 
-declare global {
-  export interface AuthorsDataItem {
-    country?: string;
-    descriptions?: {
-      [lng: string]: string;
-    };
-    github?: string;
-    glitch?: string;
-    homepage?: string;
-    image?: string;
-    name: {
-      given: string;
-      family: string;
-    };
-    org?: {
-      name?: string;
-      unit?: string;
-    };
-    twitter?: string;
-  };
-  export interface AuthorsData {
-    [key: string]: AuthorsDataItem;
-  };
-}
+const {index} = require('../../../_collections/hooks/videos');
 
-// empty export to keep file a module
-export {};
+module.exports = {
+  pagination: {
+    before: (videos) => index(videos),
+  },
+};

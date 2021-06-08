@@ -22,7 +22,7 @@ const addPagination = require('../../_utils/add-pagination');
 const filterByLang = require('../../_filters/filter-by-lang');
 
 /**
- * @param {AuthorsItem[]|TagsItem[]} items
+ * @param {AuthorsItem[]|TagsItem[]|VideosItem[]} items
  * @return {TODO[]}
  */
 const feed = (items) => {
@@ -42,7 +42,7 @@ const feed = (items) => {
 };
 
 /**
- * @param {AuthorsItem[]|TagsItem[]} items
+ * @param {AuthorsItem[]|TagsItem[]|VideosItem[]} items
  * @param {string} href
  * @param {string[]} testItems
  * @return {Paginated[]}
@@ -62,8 +62,8 @@ const index = (items, href, testItems) => {
 };
 
 /**
- * @param {AuthorsItem[]|TagsItem[]} items
- * @param {string} lang
+ * @param {AuthorsItem[]|TagsItem[]|VideosItem[]} items
+ * @param {string} [lang]
  * @return {Paginated[]}
  */
 const individual = (items, lang) => {
