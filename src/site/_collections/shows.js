@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 const CacheAsset = require('@11ty/eleventy-cache-assets');
-/** @type VideosData */
-const videosData = require('../_data/videosData.json');
+/** @type ShowsData */
+const showsData = require('../_data/showsData.json');
 
 /**
  * Returns all authors with their posts.
  *
- * @return {Promise<Videos>}
+ * @return {Promise<Shows>}
  */
 module.exports = async () => {
-  /** @type Videos */
-  const videos = {};
-  const keys = Object.keys(videosData);
+  /** @type Shows */
+  const shows = {};
+  const keys = Object.keys(showsData);
 
   for (const key of keys) {
-    const videoData = videosData[key];
-    const href = `/videos/${key}/`;
-    const url = `https://storage.googleapis.com/web-dev-uploads/youtube/${videoData.playlistId}.json`;
+    const showData = showsData[key];
+    const href = `/shows/${key}/`;
+    const url = `https://storage.googleapis.com/web-dev-uploads/youtube/${showData.playlistId}.json`;
     const elements = (
       await CacheAsset(url, {
         duration: '6h',
@@ -49,15 +49,15 @@ module.exports = async () => {
       continue;
     }
 
-    /** @type VideosItem */
-    const video = {
-      ...videoData,
+    /** @type ShowsItem */
+    const show = {
+      ...showData,
       data: {
-        alt: videoData.title,
+        alt: showData.title,
         date: elements[elements.length - 1].date,
         hero: elements[0].data.thumbnail,
-        subhead: videoData.description,
-        title: videoData.title,
+        subhead: showData.description,
+        title: showData.title,
       },
       elements,
       href,
@@ -67,22 +67,22 @@ module.exports = async () => {
 
     // Limit posts for percy
     if (process.env.PERCY) {
-      video.elements = video.elements.slice(-6);
+      show.elements = show.elements.slice(-6);
     }
 
     // Set created on date and updated date
-    if (video.elements.length > 0) {
-      video.data.date = video.elements.slice(-1).pop().data.date;
-      const updated = video.elements.slice(0, 1).pop().data.date;
-      if (video.data.date !== updated) {
-        video.data.updated = updated;
+    if (show.elements.length > 0) {
+      show.data.date = show.elements.slice(-1).pop().data.date;
+      const updated = show.elements.slice(0, 1).pop().data.date;
+      if (show.data.date !== updated) {
+        show.data.updated = updated;
       }
     }
 
-    if (video.elements.length > 0) {
-      videos[key] = video;
+    if (show.elements.length > 0) {
+      shows[key] = show;
     }
   }
 
-  return videos;
+  return shows;
 };

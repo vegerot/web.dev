@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,18 @@
  * limitations under the License.
  */
 
-const {feed} = require('../../../_collections/hooks/videos');
-
 module.exports = {
   pagination: {
-    before: (video) => feed(video),
+    before: (shows) => {
+      const elements = shows.reduce((a, c) => [...a, ...c.elements], []);
+      return elements.map((e, i) => ({
+        title: e.data.title,
+        href: e.url,
+        description: e.data.subhead,
+        index: i,
+        pages: elements.length,
+        data: e.data,
+      }));
+    },
   },
 };

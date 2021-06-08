@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-declare global {
-  export interface VideosDataItem {
-    playlistId: string;
-    description: string;
-    title: string;
-  }
-  export interface VideosData {
-    [key: string]: VideosDataItem;
-  }
-}
+const {index} = require('../../../_collections/hooks/shows');
 
-// empty export to keep file a module
-export {};
+module.exports = {
+  pagination: {
+    before: (shows) => index(shows),
+  },
+};

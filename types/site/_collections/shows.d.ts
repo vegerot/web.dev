@@ -14,18 +14,31 @@
  * limitations under the License.
  */
 
-module.exports = {
-  pagination: {
-    before: (videos) => {
-      const elements = videos.reduce((a, c) => [...a, ...c.elements], []);
-      return elements.map((e, i) => ({
-        title: e.data.title,
-        href: e.url,
-        description: e.data.subhead,
-        index: i,
-        pages: elements.length,
-        data: e.data,
-      }));
-    },
-  },
-};
+declare global {
+  export interface ShowsItem extends ShowsDataItem {
+    data: {
+      alt: string;
+      /**
+       * When the first post was created.
+       */
+      date: Date;
+      hero: string;
+      subhead: string;
+      title: string;
+      /**
+       * When the last post was last created.
+       */
+      updated?: Date;
+    };
+    elements: EleventyCollectionItem[];
+    href: string;
+    key: string;
+    url: string;
+  }
+  export interface Shows {
+    [key: string]: ShowsItem;
+  }
+}
+
+// empty export to keep file a module
+export {};

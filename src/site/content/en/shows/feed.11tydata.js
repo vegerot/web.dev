@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-const {index} = require('../../../_collections/hooks/videos');
+const {feed} = require('../../../_collections/hooks/shows');
 
 module.exports = {
   pagination: {
-    before: (videos) => index(videos),
+    before: (shows) => feed(shows),
   },
 };

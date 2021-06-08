@@ -17,31 +17,31 @@
 const {feed, index, individual} = require('./utils');
 
 /**
- * @param {VideosItem[]} videos
- * @return {VideosItem[]}
+ * @param {ShowsItem[]} shows
+ * @return {ShowsItem[]}
  */
-const videosFeed = (videos) => feed(videos);
+const showsFeed = (shows) => feed(shows);
 
 /**
- * @param {VideosItem[]} videos
+ * @param {ShowsItem[]} shows
  * @return {Paginated[]}
  */
-const videosIndex = (videos) => {
-  const href = '/videos/';
+const showsIndex = (shows) => {
+  const href = '/shows/';
   const testTags = ['http-203'];
 
-  return index(videos, href, testTags);
+  return index(shows, href, testTags);
 };
 
 /**
- * @param {VideosItem[]} videos
+ * @param {ShowsItem[]} shows
  * @param {string} [lang]
  * @return {Paginated[]}
  */
-const videosIndividual = (videos, lang) => individual(videos, lang);
+const showsIndividual = (shows, lang) => individual(shows, lang);
 
 module.exports = {
-  feed: videosFeed,
-  index: videosIndex,
-  individual: videosIndividual,
+  feed: showsFeed,
+  index: showsIndex,
+  individual: showsIndividual,
 };

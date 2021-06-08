@@ -22,7 +22,7 @@ const addPagination = require('../../_utils/add-pagination');
 const filterByLang = require('../../_filters/filter-by-lang');
 
 /**
- * @param {AuthorsItem[]|TagsItem[]|VideosItem[]} items
+ * @param {AuthorsItem[]|TagsItem[]|ShowsItem[]} items
  * @return {TODO[]}
  */
 const feed = (items) => {
@@ -42,7 +42,7 @@ const feed = (items) => {
 };
 
 /**
- * @param {AuthorsItem[]|TagsItem[]|VideosItem[]} items
+ * @param {AuthorsItem[]|TagsItem[]|ShowsItem[]} items
  * @param {string} href
  * @param {string[]} testItems
  * @return {Paginated[]}
@@ -51,8 +51,10 @@ const index = (items, href, testItems) => {
   let itemsWithPosts = [];
 
   if (process.env.PERCY) {
+    // @ts-ignore
     itemsWithPosts = items.filter((item) => testItems.includes(item.key));
   } else {
+    // @ts-ignore
     itemsWithPosts = items.filter((item) => item.elements.length > 0);
   }
 
@@ -62,7 +64,7 @@ const index = (items, href, testItems) => {
 };
 
 /**
- * @param {AuthorsItem[]|TagsItem[]|VideosItem[]} items
+ * @param {AuthorsItem[]|TagsItem[]|ShowsItem[]} items
  * @param {string} [lang]
  * @return {Paginated[]}
  */

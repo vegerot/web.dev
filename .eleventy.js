@@ -63,8 +63,8 @@ const pages = require('./src/site/_collections/pages');
 const {
   postsWithLighthouse,
 } = require(`./src/site/_collections/posts-with-lighthouse`);
+const shows = require(`./src/site/_collections/shows`);
 const tags = require(`./src/site/_collections/tags`);
-const videos = require(`./src/site/_collections/videos`);
 
 // Filters
 const filtersDir = 'src/site/_filters';
@@ -143,8 +143,8 @@ module.exports = function (config) {
   config.addCollection('newsletters', newsletters);
   config.addCollection('pages', pages);
   config.addCollection('postsWithLighthouse', postsWithLighthouse);
+  config.addCollection('shows', shows);
   config.addCollection('tags', tags);
-  config.addCollection('videos', videos);
   // Turn collection.all into a lookup table so we can use findBySlug
   // to quickly find collection items without looping.
   config.addCollection('memoized', (collection) => {

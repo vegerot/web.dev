@@ -15,28 +15,13 @@
  */
 
 declare global {
-  export interface VideosItem extends VideosDataItem {
-    data: {
-      alt: string;
-      /**
-       * When the first post was created.
-       */
-      date: Date;
-      hero: string;
-      subhead: string;
-      title: string;
-      /**
-       * When the last post was last created.
-       */
-      updated?: Date;
-    };
-    elements: EleventyCollectionItem[];
-    href: string;
-    key: string;
-    url: string;
+  export interface ShowsDataItem {
+    playlistId: string;
+    description: string;
+    title: string;
   }
-  export interface Videos {
-    [key: string]: VideosItem;
+  export interface ShowsData {
+    [key: string]: ShowsDataItem;
   }
 }
 
