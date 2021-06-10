@@ -15,18 +15,42 @@
  */
 
 const {feed, index, individual} = require('./utils');
+const {defaultLocale} = require('../../_data/site');
+const {i18n} = require('../../_filters/i18n');
 
 /**
  * @param {ShowsItem[]} shows
+ * @param {string} [lang]
  * @return {ShowsItem[]}
  */
-const showsFeed = (shows) => feed(shows);
+const getFields = (shows, lang = defaultLocale) => {
+  return shows.map((s) => {
+    s.description = i18n(`i18n.paths.shows.${s.key}.description`, lang);
+    s.title = i18n(`i18n.paths.shows.${s.key}.title`, lang);
+    s.data.alt = i18n(`i18n.paths.shows.${s.key}.title`, lang);
+    s.data.subhead = i18n(`i18n.paths.shows.${s.key}.description`, lang);
+    s.data.title = i18n(`i18n.paths.shows.${s.key}.title`, lang);
+    return s;
+  });
+};
 
 /**
  * @param {ShowsItem[]} shows
+ * @param {string} [lang]
+ * @return {ShowsItem[]}
+ */
+const showsFeed = (shows, lang = defaultLocale) => {
+  shows = getFields(shows, lang);
+  return feed(shows);
+};
+
+/**
+ * @param {ShowsItem[]} shows
+ * @param {string} [lang]
  * @return {Paginated[]}
  */
-const showsIndex = (shows) => {
+const showsIndex = (shows, lang = defaultLocale) => {
+  shows = getFields(shows, lang);
   const href = '/shows/';
   const testTags = ['http-203'];
 
@@ -38,7 +62,10 @@ const showsIndex = (shows) => {
  * @param {string} [lang]
  * @return {Paginated[]}
  */
-const showsIndividual = (shows, lang) => individual(shows, lang);
+const showsIndividual = (shows, lang) => {
+  shows = getFields(shows, lang);
+  return individual(shows);
+};
 
 module.exports = {
   feed: showsFeed,

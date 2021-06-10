@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 const CacheAsset = require('@11ty/eleventy-cache-assets');
+const fs = require('fs');
+const yaml = require('js-yaml');
+const path = require('path');
+
 /** @type ShowsData */
-const showsData = require('../_data/showsData.json');
+const showsData = yaml.safeLoad(
+  fs.readFileSync(
+    path.join(__dirname, '..', '_data', 'i18n', 'paths', 'shows.yml'),
+    'utf-8',
+  ),
+);
 
 /**
  * Returns all authors with their posts.

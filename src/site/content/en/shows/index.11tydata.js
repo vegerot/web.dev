@@ -15,9 +15,10 @@
  */
 
 const {index} = require('../../../_collections/hooks/shows');
+const {lang} = require('../lang');
 
 module.exports = {
   pagination: {
-    before: (shows) => index(shows),
+    before: (shows) => index(shows, lang),
   },
 };

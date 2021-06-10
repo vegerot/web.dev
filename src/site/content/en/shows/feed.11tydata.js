@@ -15,9 +15,10 @@
  */
 
 const {feed} = require('../../../_collections/hooks/shows');
+const {lang} = require('../lang');
 
 module.exports = {
   pagination: {
-    before: (shows) => feed(shows),
+    before: (shows) => feed(shows, lang),
   },
 };
